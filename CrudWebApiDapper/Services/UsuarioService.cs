@@ -41,9 +41,9 @@ namespace CrudWebApiDapper.Services
             }
         }
 
-        public async Task<ResponseModel<UsuarioListarDto>> BuscarUsuarioPorId(int idUsuario)
+        public async Task<ResponseModel<UsuarioModel>> BuscarUsuarioPorId(int idUsuario)
         {
-            ResponseModel<UsuarioListarDto> resposta = new ResponseModel<UsuarioListarDto>();
+            ResponseModel<UsuarioModel> resposta = new ResponseModel<UsuarioModel>();
 
             using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
             {
@@ -57,10 +57,10 @@ namespace CrudWebApiDapper.Services
                 }
 
                 // Transformação Mapper
-                var usuarioMap = _mapper.Map<UsuarioListarDto>(usuariosDB);
+                //var usuarioMap = _mapper.Map<UsuarioModel>(usuariosDB);
 
-                resposta.Dados = usuarioMap;
-                resposta.Mensagem = "Usuários localizados com sucesso!";
+                resposta.Dados = usuariosDB;
+                resposta.Mensagem = "Usuário localizado com sucesso!";
                 resposta.Status = true;
                 return resposta;
             }
